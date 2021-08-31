@@ -10,8 +10,10 @@ export default {
 
   props: ['user'],
 
-  setup(props) {
+  setup(props, context) {
     const flag = computed(() => props.user.name === 'John');
+
+    context.emit('alert', { message: 'alert component' });
 
     return {
       flag,
