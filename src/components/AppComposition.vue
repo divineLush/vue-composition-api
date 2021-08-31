@@ -5,6 +5,7 @@
   <p>{{ name }} {{ age }}</p>
   <input type="test" v-model="phrase" />
   <p>{{ reversedPhrase }}</p>
+  <app-alert :user="user"></app-alert>
 </template>
 
 <script>
@@ -17,9 +18,14 @@ import {
   onBeforeMount,
   onMounted,
 } from 'vue';
+import AppAlert from '@/components/AppAlert.vue';
 
 export default {
   name: 'AppComposition',
+
+  components: {
+    AppAlert,
+  },
 
   // lifecycle functions
   // onBeforeMount()
@@ -35,6 +41,11 @@ export default {
   // setup() runs after the beforeCreate() but before created()
   // its best practice to put code in the setup() that would normally be in these hooks
   setup() {
+    // runs before the components props, data, methods and computed properties are registered
+    // runs before any lifecycle functions
+    // no access to anything
+    // this keyword won't work
+    // setup(props, context)
     onBeforeMount(() => {
       console.log('onBeforeMount');
     });
@@ -85,6 +96,7 @@ export default {
       // ...user
       // gotta use toRefs() to spread and shorten names in the template
       ...toRefs(user),
+      user,
       phrase,
       reversedPhrase,
       double,
