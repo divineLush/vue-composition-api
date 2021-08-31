@@ -14,12 +14,35 @@ import {
   toRefs,
   watch,
   computed,
+  onBeforeMount,
+  onMounted,
 } from 'vue';
 
 export default {
   name: 'AppComposition',
 
+  // lifecycle functions
+  // onBeforeMount()
+  // onMounted()
+  // onBeforeUpdate()
+  // onUpdated()
+  // onBeforeUnmount()
+  // onUnmounted()
+  // onActived() - keep-alive
+  // onDeactivated()
+
+  // no beforeCreate() and created() hooks
+  // setup() runs after the beforeCreate() but before created()
+  // its best practice to put code in the setup() that would normally be in these hooks
   setup() {
+    onBeforeMount(() => {
+      console.log('onBeforeMount');
+    });
+
+    onMounted(() => {
+      console.log('onMounted');
+    });
+
     // create reactive reference
     // ref() returns an object
     // ref() is meant for primitive values
