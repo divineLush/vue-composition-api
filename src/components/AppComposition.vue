@@ -6,6 +6,7 @@
   <input type="test" v-model="phrase" />
   <p>{{ reversedPhrase }}</p>
   <app-alert :user="user"></app-alert>
+  <button ref="btn">button</button>
 </template>
 
 <script>
@@ -46,12 +47,23 @@ export default {
     // no access to anything
     // this keyword won't work
     // setup(props, context)
+
+    // template ref
+    // this reactive ref wont be bound to anything until the component has been mounted
+    // the value for the ref attribute must correspond
+    // to the name of the reactive ref in the setup()
+    const btn = ref(null);
+
     onBeforeMount(() => {
       console.log('onBeforeMount');
     });
 
     onMounted(() => {
       console.log('onMounted');
+
+      btn.value.addEventListener('click', () => {
+        console.log('btn click');
+      });
     });
 
     // create reactive reference
@@ -100,6 +112,7 @@ export default {
       phrase,
       reversedPhrase,
       double,
+      btn,
     };
   },
 };
